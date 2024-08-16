@@ -1,0 +1,110 @@
+﻿@model RegistrationDTO
+@{
+    ViewData["Title"] = "Registration Page";
+    ViewBag.CurrentUrl = "~/Account/Registration";
+}
+
+<div class="container_log">
+    <h2 class="log_head">Registration</h2>
+    <form asp-controller="Account" asp-action="Registration" asp-route-ReturnnUrl="@Context.Request.Query["ReturnUrl"] method="post">
+
+        @*PersonName*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <input asp-for="PersonName" class="inp-n" placeholder="Name.." />
+            </div>
+        </div>
+        <div class="form-field-text-red">
+            <span asp-validation-for="PersonName" class="text-red"></span>
+        </div>
+
+        @*Email*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <input asp-for="Email" class="inp-e" placeholder="Email.." />
+            </div>
+        </div>
+        <div class="form-field-text-red">
+            <span asp-validation-for="Email" class="text-red"></span>
+        </div>
+
+        @*Phone*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <input asp-for="Phone" class="inp-ph" placeholder="Phone.." />
+            </div>
+        </div>
+        <div class="form-field-text-red">
+            <span asp-validation-for="Phone" class="text-red"></span>
+        </div>
+
+        @*Password*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <input asp-for="Password" class="inp-p" placeholder="Password.." />
+            </div>
+        </div>
+        <div class="form-field-text-red">
+            <span asp-validation-for="Password" class="text-red"></span>
+        </div>
+
+        @*Confirm Password*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <input asp-for="ConfirmPassword" class="inp-p" placeholder="Confirm Password.." />
+            </div>
+        </div>
+        <div class="form-field-text-red">
+            <span asp-validation-for="ConfirmPassword" class="text-red"></span>
+        </div>
+        
+        @*
+        User Type
+
+        <div class="form-field">
+            <div class="form-field-chek">
+                <label class="text">User Type</label>
+            </div>
+            <div class="form-field-rad">
+                <input type="radio" id="User" asp-for="UserType" value="User" checked />
+                <label class="text" for="User">User</label>
+                <input type="radio" id="Admin" asp-for="UserType" value="Admin" />
+                <label class="text" for="Admin">Admin</label>
+            </div>
+        </div>
+
+        *@
+        
+        @*recapcha*@
+        <div class="form-field">
+            <div class="g-recaptcha" data-sitekey="6LeQF4opAAAAAL28pFMIdseuDd9MPmndmaqXUNcE"></div>
+        </div>
+        
+        @*Registration button*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <button class="but" type="submit">Register</button>
+            </div>  
+            @*
+            <div asp-validation-summary="All" class="text-red"></div>
+            @if (ViewBag.Errors != null)
+            {
+                <div class="text-red ml">
+                    <ul>
+                        @foreach (string error in ViewBag.Errors)
+                        {
+                            <li class="ml">@error</li>
+                        }
+                    </ul>
+                </div>
+            }
+        *@
+        </div> 
+    </form>
+    <div class="form-field-r">
+    <p class="text">Already registered?</p>
+        <a asp-controller="Account" asp-action="Login" class="link">Login</a>
+    </div>
+    
+    
+</div>

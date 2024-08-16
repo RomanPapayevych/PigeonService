@@ -1,0 +1,95 @@
+﻿    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Project</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Project.styles.css" asp-append-version="true" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body id="cont">
+    <header>
+        <div class="container-navbar" id="container-navbar">
+            <nav class="navbar">
+                <ul class="ul-navbar">
+                    <a asp-controller="Home" asp-action="Index">
+                        <img class="logo-pigeon" src="~/logo-pigeon.png" alt="Pigeon Planner">
+                    </a>
+                    <li class="li-navbar"><a asp-controller="Pigeon" asp-action="GetAll">ADD PIGEONS</a></li>@*Addpigeon*@
+                    <li class="li-navbar"><a asp-controller="Home" asp-action="Privacy" >MORE</a></li>
+                    <li class="li-navbar"><a asp-controller="Home" asp-action="Privacy" >FEATURES</a></li>
+                    <li class="li-navbar"><a asp-controller="Home" asp-action="Privacy" >ABOUT</a></li>
+                    <li class="li-navbar"><a asp-controller="Home" asp-action="Index">HOME</a></li>
+                    
+                </ul>
+                <ul>
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        <li class="li-navbar">
+                            <p class="text-navbar">@User.Identity?.Name</p>
+                        </li>
+                        <li class="li-navbar">
+                            <img class="img-navbar" src="~/iconperson.png"></img>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="li-navbar">
+                                <a class="nav-active" asp-controller="Account" asp-action="Admin">Admin</a>
+                            </li>
+                        }
+                        <li class="li-navbar">
+                            <a class="nav-active" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        if (ViewBag.CurrentUrl == "~/Account/Registration")
+                        {
+                            <li class="li-navbar">
+                                <a asp-controller="Account" asp-action="Registration" class="nav-active">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="li-navbar">
+                                <a class="nav-active" asp-controller="Account" asp-action="Registration">Register</a>
+                            </li>
+                        }
+                        if (ViewBag.CurrentUrl == "~/Account/Login")
+                        {
+                            <li class="li-navbar">
+                                <a asp-controller="Account" asp-action="Login" class="nav-active">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="li-navbar">
+                                <a class="nav-active" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+        
+    </header>
+    <div class="container">
+        <main role="main" class="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

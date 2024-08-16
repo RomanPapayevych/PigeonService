@@ -1,0 +1,80 @@
+﻿@model IEnumerable<PigeonDTO>
+@{
+    ViewData["Title"] = "YourPigeon Page";
+    ViewBag.CurrentUrl = "~/Pigeon/GetAll";
+}
+
+@*<form asp-controller="Pigeon" asp-action="GetAll" method="get">*@
+
+<div class="container-main">
+    <h1 class="home-title-pigeon">Pigeons</h1>
+    <div class="navig-menu">
+
+        <div class="">
+            <a class="but-add-pigeon-getAll-cr" asp-controller="Pigeon" asp-action="AddPigeon">Create</a>
+        </div>
+        
+        <div class="">
+            <form asp-controller="Pigeon" asp-action="GetAll">
+                <input class="search-panel" type="search" id="Search" name="searchString" placeholder="Search.."></input>
+                <button class="but-add-pigeon-getAll" type="submit">Search</button>
+                <a asp-controller="Pigeon" asp-action="GetAll" class="but-add-pigeon-getAll">Clear all</a>
+            </form>
+            
+        </div>
+
+    </div>
+    <div class="container-home">
+        <table class="table">
+            <thead>
+                <tr class="default-text-users">
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Number</th>
+                    <th>Year</th>
+                    <th>Gender</th>
+                    <th>Father</th>
+                    <th>Mother</th>
+                    <th>IsAlive</th>
+                    <th>Description</th>
+                    <th>Lineage</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pigeon in Model)
+                {
+                    <tr class="default-text-users">
+                        <td>@pigeon.PigeonName</td>
+                        <td>@pigeon.Color</td>
+                        <td>@pigeon.Number</td>
+                        <td>@pigeon.Year!.Value.ToShortDateString()</td>
+                        <td>@pigeon.Gender</td>
+                        <td>@pigeon.Father</td>
+                        <td>@pigeon.Mother</td>
+                        <td>@pigeon.IsAlive</td>
+                        <td>@pigeon.Description</td>
+                        <td>
+                            <form asp-controller="Pigeon" asp-action="Lineage" asp-route-id="@pigeon.Id" method="get">
+                                <button asp-controller="Pigeon" asp-action="Lineage" asp-route-id="@pigeon.Id" method="get" class="but-del">Lineage</button>
+                            </form> 
+                        </td>
+                        <td>
+                            <form asp-controller="Pigeon" asp-action="Edit" asp-route-id="@pigeon.Id" method="get">
+                                <button asp-controller="Pigeon" asp-action="Edit" asp-route-id="@pigeon.Id" method="get" class="but-del" type="submit">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-controller="Pigeon" asp-action="Delete" asp-route-id="@pigeon.Id" method="post">
+                                <button class="but-del" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </div>
+    </table>
+
+</div>
+@*</form>*@

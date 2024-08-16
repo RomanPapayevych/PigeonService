@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "Admin Page";
+    ViewBag.CurrentUrl = "~/Account/Admin";
+}
+<div class="container-main">
+    <h1 class="home-title-pigeon">Admin Page</h1>
+    <div class="container-home">
+        <h1 class="default-text">All users</h1>
+        <table class="table">
+    <thead>
+        <tr class="default-text-two">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>              
+            <th>Delete</th>               
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr class="default-text-users">
+                <td>@user.PersonName</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>
+                    <form asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id" method="post">
+                        <button class="but-del" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+﻿@model PigeonDTO
+@{
+    ViewData["Title"] = "Pigeon Page";
+    ViewBag.CurrentUrl = "~/Pigeon/AddPigeon";
+}
+<div class="container-main">
+    <h1 class="home-title-pigeon">Add your pigeon</h1>
+    <div class="container-create">
+
+    <form asp-action="AddPigeon" method="post">
+        <div class="cent">
+            <div class="form-group">
+                <label class="label-lines" for="Name">Name:</label>
+                <input asp-for="PigeonName" class="input-lines" />
+            </div>
+        </div>
+         <div class="cent">
+            <div class="form-group">
+                <label class="label-lines" for="Color">Color:</label>
+                <select asp-for="Color" class="input-lines">
+                    <option value="Gray">Gray</option>
+                    <option value="White">White</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Black">Black</option>
+                    <option value="Redhead">Redhead</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Pink">Pink</option>
+                    <option value="MultiColored">MultiColored</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="cent">
+            <div class="form-group">
+                <label class="label-lines" for="Number">Number:</label>
+                <input asp-for="Number" class="input-lines" />
+            </div>
+        </div>
+        <div class="cent">
+            <div class="form-group">
+                <label class="label-lines" for="Age">Year:</label>
+                <input asp-for="Year" type="date" class="input-lines"/>
+            </div>
+        </div>
+        <div class="cent">
+            <div class="form-group">
+            <label class="label-lines" for="Gender">Gender:</label>
+            <select asp-for="Gender" class="input-lines">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            </div>
+        </div>
+        <div class="cent">
+             <div class="form-group">
+                <label class="label-lines" for="Father">Father:</label>
+                <select asp-for="Father" class="input-lines">
+                    @if (ViewBag.PigeonForId != null)
+                    {
+                        <option value="">Select Father</option>
+                        @foreach (var pigeonNumber in ViewBag.PigeonForId)
+                        {
+                            <option value="@pigeonNumber">@pigeonNumber</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">Nothing :(</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="cent">
+            <div class="form-group">
+                <label class="label-lines" for="Mother">Mother:</label>
+                @*<input asp-for="Mother" class="form-control" />*@
+                <select asp-for="Mother" class="input-lines">
+
+                    @if (ViewBag.PigeonForId != null)
+                    {
+                        <option value="">Select Mother</option>
+                        @foreach (var pigeonNumber in ViewBag.PigeonForId)
+                        {
+                            <option value="@pigeonNumber">@pigeonNumber</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">Nothing :(</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="cent">
+            <div class="form-group">
+                <label class="label-lines" for="IsAlive">Is Alive:</label>
+                <select asp-for="IsAlive" class="input-lines">
+                    <option value="Alive">Alive</option>
+                    <option value="Dead">Dead</option>
+                </select>
+            </div>
+        </div>
+        <div class="cent">
+            <div class="form-group">
+                <label class="label-lines" for="Description">Description:</label>
+                <textarea asp-for="Description" class="input-lines"></textarea>
+            </div>
+        </div>
+        <div class="cont-but">
+            <button type="submit" class="but-add-pigeon" @*class="btn btn-primary"*@>Add Pigeon</button>
+            <button asp-controller="Pigeon" asp-action="GetAll" type="submit" class="but-add-pigeon">Go back</button>
+        </div>
+
+    </form>   
+    </div>
+</div>

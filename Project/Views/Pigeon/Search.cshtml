@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PigeonDTO>
+@{
+    ViewData["Title"] = "YourPigeon Page";
+    ViewBag.CurrentUrl = "~/Pigeon/Search";
+}
+<div class="container-main">
+    <h1 class="home-title-pigeon">Pigeons</h1>
+    <div class="cont-pos">
+        <div class="cont-pos">
+            <a class="btn btn-primary" asp-controller="Pigeon" asp-action="AddPigeon">Create</a>
+        </div>
+        <div class="cont-pos">
+            <p>search by:</p>
+            <select>
+                <option value="PigeonName">Name</option>
+                <option value="Color">Color</option>
+                <option value="Number">Number</option>
+                <option value="Year">Year</option>
+                <option value="Gender">Gender</option>
+                <option value="Father">Father</option>
+                <option value="Mother">Mother</option>
+                <option value="IsAlive">IsAlive</option>
+                <option value="Description">Description</option>
+            </select>
+            <form asp-controller="Pigeon" asp-action="Search">
+                <input type="search" id="searchString" name="searchString" placeholder="Search"></input>
+                <a class="btn btn-primary" asp-controller="Pigeon" asp-action="Search">Search</a>
+            </form>
+            <a asp-controller="Pigeon" asp-action="GetAll" class="">Clear all</a>
+        </div>
+    </div>
+    <div class="container-home">
+        <table class="table">
+            <thead>
+                <tr class="default-text-users">
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Number</th>
+                    <th>Year</th>
+                    <th>Gender</th>
+                    <th>Father</th>
+                    <th>Mother</th>
+                    <th>IsAlive</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pigeon in Model)
+                {
+                    <tr class="default-text-users">
+                        <td>@pigeon.PigeonName</td>
+                        <td>@pigeon.Color</td>
+                        <td>@pigeon.Number</td>
+                        <td>@pigeon.Year!.Value.ToShortDateString()</td>
+                        <td>@pigeon.Gender</td>
+                        <td>@pigeon.Father</td>
+                        <td>@pigeon.Mother</td>
+                        <td>@pigeon.IsAlive</td>
+                        <td>@pigeon.Description</td>
+                        <td>
+                            <form asp-controller="Pigeon" asp-action="Edit" asp-route-id="@pigeon.Id" method="get">
+                                <button asp-controller="Pigeon" asp-action="Edit" asp-route-id="@pigeon.Id" method="get" class="but-del" type="submit">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-controller="Pigeon" asp-action="Delete" asp-route-id="@pigeon.Id" method="post">
+                                <button class="but-del" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </div>
+    </table>
+
+</div>

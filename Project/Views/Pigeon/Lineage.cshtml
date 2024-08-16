@@ -1,0 +1,82 @@
+﻿@*@model List<PigeonDTO>
+
+@{
+    ViewData["Title"] = "Lineage";
+}
+
+<h1>Lineage</h1>
+
+<ul>
+    @foreach (var pigeon in Model)
+    {
+        <li>@pigeon.PigeonName</li>
+        <ul>
+            @Html.RenderPartialAsync("Lineage", pigeon.FatherPigeon)
+            @Html.RenderPartialAsync("Lineage", pigeon.MotherPigeon)
+        </ul>
+    }
+</ul>
+<form>
+    <button asp-controller="Pigeon" asp-action="GetAll" type="submit" class="btn btn-primary">Go back</button>
+</form>*@
+
+@*@model PigeonDTO*@
+@*@model List<Project.ViewModels.PigeonDTO>*@
+@*@model IEnumerable<PigeonDTO>*@
+@*@{
+    ViewData["Title"] = "YourPigeon Page";
+    ViewBag.CurrentUrl = "~/Pigeon/Lineage";
+}
+<h1 class="home-title-pigeon">Lineage</h1>
+
+
+<h1>Pigeon Lineage</h1>
+
+<ul>
+    @foreach (var pigeon in Model)
+    {
+        <li>@pigeon.PigeonName</li>
+        @if (pigeon.Lineage != null && pigeon.Lineage.Any())
+        {
+            <ul>
+                @foreach (var ancestor in pigeon.Lineage)
+                {
+                    <li>@ancestor.PigeonName</li>
+                }
+            </ul>
+        }
+    }
+</ul>*@
+@*@model List<PigeonDTO>*@
+
+@{
+    ViewData["Title"] = "Pigeon Lineage";
+}
+<h1 class="home-title-pigeon">Lineage</h1>
+<form>
+    <button asp-controller="Pigeon" asp-action="GetAll" type="submit" class="btn btn-primary">Go back</button>
+</form>
+@*
+
+
+@if (Model.Count == 0)
+{
+    <p>No lineage found.</p>
+}
+else
+{
+    <ul>
+        @foreach (var pigeon in Model)
+        {
+            <li>@pigeon.PigeonName</li>
+            <li>@pigeon.Number</li>
+            <li>Parents</li>
+            <li>@pigeon.Father</li>
+            <li>@pigeon.Mother</li>
+            
+        }
+    </ul>
+}
+<form>
+    <button asp-controller="Pigeon" asp-action="GetAll" type="submit" class="btn btn-primary">Go back</button>
+</form>*@

@@ -1,0 +1,56 @@
+﻿@model LoginDTO
+@{
+    ViewData["Title"] = "Login Page";
+    ViewBag.CurrentUrl = "~/Account/Login";
+}
+
+<div class="container_log">
+    <h2 class="log_head">Login</h2>
+    <form asp-controller="Account" asp-action="Login" asp-route-ReturnnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
+        
+        @*Email*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <input asp-for="Email" class="inp-e" placeholder="Email.." />
+            </div>
+        </div>
+        <div class="form-field-text-red">
+            <span asp-validation-for="Email" class="text-red"></span>
+        </div>
+
+        @*Password*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <input asp-for="Password" class="inp-p" placeholder="Password.." />
+            </div>
+        </div>
+        <div class="form-field-text-red">
+            <span asp-validation-for="Password" class="text-red"></span>
+        </div>
+
+        @*Login button*@
+        <div class="form-field">
+            <div class="form-field-inp">
+                <button class="but" type="submit">Login</button>
+            </div>  
+        @*
+            <div asp-validation-summary="All" class="text-red"></div>
+            @if (ViewBag.Errors != null)
+            {
+                <div class="text-red ml">
+                    <ul>
+                        @foreach (string error in ViewBag.Errors)
+                        {
+                            <li class="ml">@error</li>
+                        }
+                    </ul>
+                </div>
+            }
+        *@
+        </div> 
+    </form>
+    <div class="form-field-r">
+        <p class="text">Not yet registered?</p>
+        <a asp-controller="Account" asp-action="Registration" class="link">Registration</a>
+    </div>
+</div>
